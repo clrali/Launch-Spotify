@@ -9,6 +9,7 @@ const Navbar = props => {
 					<Typography variant="h3">Spotify Cool Project Yay!</Typography>
 				<nav>
 					<Button variant={useLocation().pathname==='/messages' ? 'contained' : 'text'} component={Link} to="/messages">MessagePage</Button>
+					<Button variant={useLocation().pathname==='/login' ? 'contained' : 'text'} component={Link} to="/login">Log Out</Button>
 				</nav>
 			</AppBar>
 			
