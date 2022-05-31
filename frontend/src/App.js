@@ -1,7 +1,11 @@
 import "./App.css";
 import Navbar from "./components/navbar/Navbar.js";
 import { Outlet, useLocation } from "react-router-dom";
+
 import {Helmet} from "react-helmet";
+
+import Login from './components/loginPage/Login.js'
+
 
 function App() {
   return (
@@ -10,8 +14,12 @@ function App() {
       
       <Navbar />
       <Outlet />
+
       {useLocation().pathname === "/"}
       
+
+      {useLocation().pathname === "/" && <Login/>} 
+
     </div>
     </div>
 
