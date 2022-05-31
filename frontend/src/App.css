@@ -38,7 +38,7 @@
 }
 
 .background--custom {
-  background: linear-gradient(90deg, #0d0d35, #de4291, #1b039b);
+  background: linear-gradient(90deg, #B3F2EF, #0d19c4, #7cd3bd);
   background-size: 300% 300%;
   animation: gradient 4s alternate infinite;
   position: absolute;
