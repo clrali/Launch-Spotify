@@ -18,9 +18,9 @@ root.render(
       <Route path="/" element={<App />}>
         <Route path="/messages" element={<Messages />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/likedsongs" element={<LikedSongs />} />
-        <Route path="/topsongs" element={<TopSongs />} />
-        <Route path="/topartists" element={<TopArtists />} />
+        <Route path="/liked" element={<LikedSongs />} />
+        <Route path="/top" element={<TopSongs />} />
+        <Route path="/artist" element={<TopArtists />} />
         <Route path="*" element={<ErrorPage />} />
 
       </Route>
