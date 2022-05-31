@@ -8,7 +8,8 @@ const Navbar = props => {
 			<AppBar color='inherit' position='static' sx={{margin: '0px', padding: '5px'}}>
 					<Typography variant="h3">Spotify Cool Project Yay!</Typography>
 				<nav>
-					<Button variant={useLocation().pathname==='/messages' ? 'contained' : 'text'} component={Link} to="/messages">MessagePage</Button>
+					<Button variant={useLocation().pathname==='/messages' ? 'contained' : 'text'} component={Link} to="/messages">Message Page</Button>
+					<Button variant={useLocation().pathname==='/likedsongs' ? 'contained' : 'text'} component={Link} to="/likedsongs">Liked Songs</Button>
 				</nav>
 			</AppBar>
 			
