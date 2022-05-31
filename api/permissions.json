@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "projectId": "spotifyproject-e0c88",
+  "private_key_id": "efeb24e780f1f4bb8b0068b06460360abf6d3b11",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDDtUeSHRYCaCM8\nobEWs3mNU9dTxO1Jo64e13FqkT25RJmov3eKMatfj8asPDn93MUKeeiGRzZHC7QT\n1Vv/F8/SYPasWaRSEW+9i6wWBH4D4yGMJiS4xzmxTjuw3eOe3+5bQ8EpUFXBHeh+\niBjUxsO/xzIs23EkbDbo18n3q1/troiG4wAoVwM75bP2Fd09XUXRP/T3hIAEqNT6\nxCMcpHCN9GJViJ66mg/R/rdAPFP7bB7qsYCcBTdyP1PHwQpnE1qynigOZFLk7E0F\nDcuceADHjTnOwYaMyTD6HfZ0+5JZxa+7ZmacwT5pq1rk/udqj5fNEJO26wYUK6nh\nhiL6GwQLAgMBAAECggEABv/s12UC7IMc/4Yo907kAhIFmZFpi0C3cZLzE4SuWHoD\npO10MRUls/1IddCRomrLAVzq3CKf5lqczjjLWYxYeoXNTMzH+8dz36unNAJlH254\nPLMAjTtS7OyHZgQJqB0KQWli9z9QUd/n+N6VRMb3KVzOhpwyp8LXE+zj5F/UxoNv\ni5BPOcIDrsFDiRwG+j/y49s3dBAO1qycelpPyt5/t6tq6X+qNaRnkse9772aadJA\n72NDAli7aJP1gAqdIRKaG7f31nyp1mGSpTQcTFKSdI/LA+C4/GLFN3zv7UfsbTcl\nF6pd8hIcMovIzEpv+QROI/dDH2tD9VW1yHw+bd3EgQKBgQDhoDqYysl2cx8BFvo1\nd34fJV7T24+adzKzRqiEeKAbQ3KFBeSi5jSe9WxMzhAmOi3iFZYG9ONDDZKKocWE\nCafNnCV5QZsST/iLDinFj6KjJLQBCnFtkfR4FqxH/wQBZtppgQ4OFLLTDX/8dHjx\n+TAy7zA7Pqdb4sdIJ5Babm/2UwKBgQDeDf25RPQOAsZy1KvPR0ytrrUU9LFNqerd\nqqEQiD6XBSQYL+e6mELL0UnRmfokNPAs7Rz1+3mSZL54VEb5Sxnyn2swR300BGp4\ntJ+1nt48h4SEYSyeGd/n0puvF58iTIWrtZlDE9hwGAVvCDJ9Xa7+nKGJisnZTuqY\nGBm5dj2UaQKBgQCv8oafjkwrDb1Y2TVHqqZ03Wyko+zJlTi5a1mQ7IxWlnNg3uac\nTg8tAtBw2KTpWqdbTmAPjrsHGDd12o+v1uO/yIvEkm++iRSWQ/Y5NTisJrwkr6Mi\nwhY16+BvyKO0ACRE8DooquWFBlsPYTjL4fo/Th17pfFXC3NChm/gxYyUNwKBgHyd\np3VQ0BII1qvc1Cq4Hb0e3brL87DdGdSajFdFzrJcDTyRrd9W0a2mX2IEoo+tMdhU\nnTsijMBuT0IiMc53qjEx7CqlBAusKsBgxXxckuWvO9w62JpFdRWZaQtjG0hZX27U\ntBUjzwRhRrNgC021xJ5Y8oLI46xTkG4YoF8njzl5AoGAe/8UwLTq4s3HBFByCvDf\nLozw+KO6HhACFB2+2eh5TsrCypKW/u40ZQmKX3V8MT38FUf6QymjsauGQQ3jJ2XU\nDn6nltdRipaNpV9VfZiHqPI7+jzb9D0BZHRUeflGBXlE3Wvq4pQeIGlM13qMCYJX\nY3kBIMj2LyNsAT6WYuNA2g0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-5fzp2@spotifyproject-e0c88.iam.gserviceaccount.com",
+  "client_id": "110469489695237802468",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-5fzp2%40spotifyproject-e0c88.iam.gserviceaccount.com"
+}

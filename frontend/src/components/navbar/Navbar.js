@@ -10,6 +10,7 @@ const Navbar = props => {
 				<nav>
 					<Button variant={useLocation().pathname==='/messages' ? 'contained' : 'text'} component={Link} to="/messages">MessagePage</Button>
 					<Button variant={useLocation().pathname==='/login' ? 'contained' : 'text'} component={Link} to="/login">Log Out</Button>
+					<Button variant={useLocation().pathname==='/likedsongs' ? 'contained' : 'text'} component={Link} to="/likedsongs">Liked Songs</Button>
 				</nav>
 			</AppBar>
 			
