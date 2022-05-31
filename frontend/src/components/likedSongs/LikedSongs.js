@@ -10,6 +10,7 @@ function LikedSongs() {
         .then((data) => {
             console.log(data)
             setLogin(data)})
+
         .catch((err) => console.log(err))
     }, [])
 
@@ -19,7 +20,6 @@ function LikedSongs() {
                 Liked Songs
             </h1>
             <a href={`${login}`}>Login to Spotify </a> 
-
         </div>
     )
 }
