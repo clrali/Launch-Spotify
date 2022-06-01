@@ -14,8 +14,12 @@ import {
   Paper,
   Grid,
 } from "@mui/material";
+import { useContext } from "react";
+import { UserContext } from "../../UserContext";
 
 const Messages = (props) => {
+	const {user, setUser} = useContext(UserContext);
+	console.log(user);
   return (
     <>
       <AppBar color="primary">
@@ -66,7 +70,7 @@ const Messages = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Stack>
-              <Button variant="text"> User1 </Button>
+              <Button variant="text"> {user} </Button>
               <Button variant="text"> User2 </Button>
               <Button variant="text"> User3 </Button>
               <Button variant="text"> User4 </Button>
@@ -74,7 +78,7 @@ const Messages = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Box>
-              <Typography variant="h6"> User </Typography>
+              <Typography variant="h6"> {user} </Typography>
               <Typography variant="p"> message </Typography>
             </Box>
             <Box>
