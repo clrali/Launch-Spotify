@@ -1,7 +1,17 @@
 var express = require("express");
 var router = express.Router();
 var fetch = require("node-fetch");
-var dotenv = require("dotenv").config();
+const db = require("./firebase");
+
+const {
+  getDocs,
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+  getDoc,
+  updateDoc
+} = require("firebase/firestore");
 
 const client_id = process.env.clientId;
 const client_secret = process.env.clientSecret;
@@ -22,6 +32,16 @@ router.get("/", async (req, res, next) => {
     console.log(err);
     res.status(500).send(err);
   }
+});
+
+router.get("/messages", async (req, res, next) => {
+  const messages = [];
+  const docs = await getDocs(collection(db, "profile/" + req.query.user + "/messengers/" + req.query.messenger + "/messages"));
+  docs.forEach((message) =>
+    messages.push({ ...message.data() })
+  );
+  console.log(messages);
+  res.json({ result: messages });
 });
 
 router.get("/callback", async (req, res, next) => {
