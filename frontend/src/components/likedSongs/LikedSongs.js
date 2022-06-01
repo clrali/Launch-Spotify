@@ -6,20 +6,15 @@ import { useEffect } from 'react';
 
 function LikedSongs() {
     
+    console.log("currently in liked songs file")
+
     const { accessToken } = useContext(AccessTokenContext);
     const [songs, setSongs] = useState([])
 
-    console.log(accessToken)
-
     useEffect(() => {
-        console.log("received liked songs")
-        fetch("http://localhost:9000/spotify/users?token="+ accessToken)
-        .then(res => {
-            console.log(res.json())
-        })
+        fetch("http://localhost:9000/users?token=" + accessToken)
+        .then(res => res.json())
         .then(data => {
-            console.log(data)
-            console.log(data.items)
             setSongs(data.items)
         })
     }, [])

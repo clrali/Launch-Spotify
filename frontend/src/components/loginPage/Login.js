@@ -16,8 +16,7 @@ import { UserContext } from "../../UserContext";
 const Login = (props) => {
   const navigate = useNavigate();
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
-  const { user, setUser} = useContext(UserContext);
-
+//   const { user, setUser} = useContext(UserContext);
 
   const onClick = (e) => {
     fetch("http://localhost:9000/spotify")
@@ -28,24 +27,22 @@ const Login = (props) => {
   };
 
   const path = window.location.href.split("/")[3];
+  let code = ''
   
-  let code = "";
-  useEffect(() => {
-    if (path) {
-      code = path.split("=")[1];
-      fetch("http://localhost:9000/spotify/callback?code=" + code)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.token) {
-			  console.log("token: ", data.token)
-			  setAccessToken(data.token);
-			  navigate("/home");
-          }
-        });
-    }
-	console.log(accessToken)
-
-  }, []);
+  useEffect(()=> {
+	if(path){
+		code = path.split('=')[1]
+		fetch('http://localhost:9000/spotify/callback?code=' + code)
+		.then(res => res.json())
+		.then(data => {
+			if(data.token){
+				setAccessToken(data.token)
+				console.log("token is set")
+				navigate('/home')
+			}  
+		})
+	}
+	}, [])
 
   return (
     <div
