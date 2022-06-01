@@ -13,7 +13,7 @@ const Login = (props) => {
   }
 
   return (
-    <div style={{ backgroundColor: "blue", height: "100vh", marginTop: 0, position: 'fixed', width: '100vw' }}>
+    <div style={{ background: "linear-gradient(#e66465, #9198e5)", height: "100vh", marginTop: 0, position: 'fixed', width: '100vw' }}>
       <div>
         <Card
           sx={{
