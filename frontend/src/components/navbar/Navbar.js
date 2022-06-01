@@ -1,16 +1,12 @@
-
 import { Link, useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
+
 import { AppBar } from "@mui/material";
 import { ThemeProvider, createMuiTheme } from '@mui/material'
+
 import "./Navbar";
 import {
-  List,
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Drawer,
   Box,
 } from "@mui/material";
@@ -27,6 +23,7 @@ import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 
+<
 const Navbar = (props) => {
   const theme = createMuiTheme({
     typography: {
@@ -41,6 +38,11 @@ const Navbar = (props) => {
     <ThemeProvider theme={theme}>
     <div className="fonts">
       
+
+const Navbar = () => {
+  return (
+    <div>
+
       <Box>
         <Drawer
           PaperProps={{
@@ -51,11 +53,19 @@ const Navbar = (props) => {
           open={true}
           variant="persistent"
         >
+
           <Button sx={{margin: 2}} variant={useLocation().pathname === "/home" ? "outlined" : "text"}  component={Link} to="/home" startIcon={useLocation().pathname === "/home" ? <HomeIcon style={{ fontSize: 35 }} /> : <HomeOutlinedIcon style={{ fontSize: 35 }}/>}>
             <Typography>Home</Typography>
           </Button>
           <Button sx={{margin: 2}} variant={useLocation().pathname === "/liked" ? "outlined" : "text"} component={Link} to="/liked" startIcon={useLocation().pathname === "/liked" ? <FavoriteIcon style={{ fontSize: 35 }} /> : <FavoriteBorderOutlinedIcon style={{ fontSize: 35 }}/>}>
             Liked Songs
+
+          <Button sx={{margin: 2}} variant={useLocation().pathname === "/home" ? "outlined" : "text"} component={Link} to="/home" startIcon={useLocation().pathname === "/home" ? <HomeIcon sx={{fontSize: '40px'}}/> : <HomeOutlinedIcon sx={{fontSize: '40px'}}/>}>
+            <Typography fontSize='28px' fontFamily="Roboto">Home</Typography>
+          </Button>
+          <Button sx={{margin: 2}} variant={useLocation().pathname === "/liked" ? "outlined" : "text"} component={Link} to="/liked" startIcon={useLocation().pathname === "/liked" ? <FavoriteIcon/> : <FavoriteBorderOutlinedIcon/>}>
+            Liked SongsS
+
           </Button>
           <Button sx={{margin: 2}} variant={useLocation().pathname === "/top" ? "outlined" : "text"} component={Link} to="/top" startIcon={useLocation().pathname === "/top" ? <BarChartIcon style={{ fontSize: 35 }}/> : <BarChartOutlinedIcon style={{ fontSize: 35 }}/>}>
             Top Songs
