@@ -5,7 +5,13 @@ const db = require("./firebase")
 const {getDocs, collection} = require("firebase/firestore")
 
 var SpotifyWebApi = require('spotify-web-api-node');
-scopes = ['user-read-private', 'user-read-email','playlist-modify-public','playlist-modify-private', 'user-top-read']
+scopes = [
+    'user-read-private', 
+    'user-read-email',
+    'playlist-modify-public',
+    'playlist-modify-private', 
+    'user-top-read',
+    'user-read-recently-played']
 
 var spotifyApi = new SpotifyWebApi({
   clientId: process.env.clientId,
@@ -14,9 +20,9 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 router.get('/login', (req, res) => {
-  var html = spotifyApi.createAuthorizeURL(scopes)
-  res.send(html + "&show_dialog=true")  
-})
+    var html = spotifyApi.createAuthorizeURL(scopes)
+    res.send(html + "&show_dialog=true")  
+});
 
 router.get('/playlists', async (req, res) => {
     try {
