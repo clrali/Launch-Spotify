@@ -16,7 +16,6 @@ import { UserContext } from "../../UserContext";
 const Login = (props) => {
   const navigate = useNavigate();
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
-  const { user, setUser} = useContext(UserContext);
 
   const onClick = (e) => {
     fetch("http://localhost:9000/spotify")
