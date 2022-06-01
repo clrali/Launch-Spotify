@@ -1,37 +1,60 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const db = require("./firebase")
+var fetch = require("node-fetch");
+var dotenv = require("dotenv").config();
 
-const {getDocs, collection} = require("firebase/firestore")
+const client_id = process.env.clientId;
+const client_secret = process.env.clientSecret;
+const redirect_uri = process.env.redirectURI;
+const scope = "user-top-read user-library-read"; //<- needs to be updated based on what you want to dogit
 
-var SpotifyWebApi = require('spotify-web-api-node');
-scopes = [
-    'user-read-private', 
-    'user-read-email',
-    'playlist-modify-public',
-    'playlist-modify-private', 
-    'user-top-read',
-    'user-read-recently-played']
-
-var spotifyApi = new SpotifyWebApi({
-  clientId: process.env.clientId,
-  clientSecret: process.env.clientSecret,
-  redirectUri: process.env.redirectURI,
+router.get("/", async (req, res, next) => {
+  try {
+    const url =
+      "https://accounts.spotify.com/authorize?client_id=" +
+      client_id +
+      "&response_type=code&redirect_uri=" +
+      redirect_uri +
+      "&scope=" +
+      scope;
+    res.status(200).json({ url: url });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
 });
 
-router.get('/login', (req, res) => {
-    var html = spotifyApi.createAuthorizeURL(scopes)
-    res.send(html + "&show_dialog=true")  
+router.get("/callback", async (req, res, next) => {
+  try {
+    const code = req.query.code;
+    //console.log(req.query)
+    const url =
+      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" +
+      code +
+      "&redirect_uri=" +
+      redirect_uri;
+    const headers = {
+      Authorization:
+        "Basic " +
+        Buffer.from(client_id + ":" + client_secret, "utf8").toString("base64"),
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
+    fetch(url, { method: "post", headers: headers })
+      .catch((err) => console.log(err))
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data)
+        obj = {
+          url: "http://localhost:3000/home",
+          token: data.access_token,
+        };
+        return obj;
+      })
+      .then((obj) => res.json(obj));
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
 });
-
-router.get('/playlists', async (req, res) => {
-    try {
-        var response = await spotifyApi.getUserPlaylists();
-        console.log(response.body)
-        res.status(200).send(response.body)
-    } catch (e) {
-        res.status(400).send(e)
-    }
-}) 
 
 module.exports = router;
