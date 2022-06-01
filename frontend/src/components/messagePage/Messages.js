@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext";
+import MessageBody from "./MessageBody";
 
 const Messages = (props) => {
 	const {user, setUser} = useContext(UserContext);
@@ -70,25 +71,14 @@ const Messages = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Stack>
-              <Button variant="text"> {user} </Button>
+              <Button variant="text"> User1 </Button>
               <Button variant="text"> User2 </Button>
               <Button variant="text"> User3 </Button>
               <Button variant="text"> User4 </Button>
             </Stack>
           </Grid>
           <Grid item xs={6}>
-            <Box>
-              <Typography variant="h6"> {user} </Typography>
-              <Typography variant="p"> message </Typography>
-            </Box>
-            <Box>
-              <Typography variant="h6"> User </Typography>
-              <Typography variant="p"> message </Typography>
-            </Box>
-            <Box>
-              <Typography variant="h6"> User </Typography>
-              <Typography variant="p"> message </Typography>
-            </Box>
+            <MessageBody></MessageBody>
           </Grid>
         </Grid>
       </Card>

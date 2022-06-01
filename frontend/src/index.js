@@ -7,6 +7,8 @@ import ErrorPage from './components/navbar/ErrorPage';
 import Messages from './components/messagePage/Messages';
 import Login from './components/loginPage/Login';
 import LikedSongs from './components/likedSongs/LikedSongs';
+import HomePage from './components/homePage/HomePage';
+
 import Forum from './components/forum/Forum'
 import TopSongs from './components/topSongs/TopSongs';
 import TopArtists from './components/topArtists/TopArtists';
@@ -29,4 +31,5 @@ root.render(
       </Routes>
       </BrowserRouter>
     </AccessTokenProvider>
+  
 );
