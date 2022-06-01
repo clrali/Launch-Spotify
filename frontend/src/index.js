@@ -9,15 +9,19 @@ import Messages from './components/messagePage/Messages';
 import Login from './components/loginPage/Login';
 import LikedSongs from './components/likedSongs/LikedSongs';
 
+
+
 import Forum from './components/forum/Forum'
 
 import TopSongs from './components/topSongs/TopSongs';
 import TopArtists from './components/topArtists/TopArtists';
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  
+    <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="/messages" element={<Messages />} />
@@ -35,4 +39,6 @@ root.render(
       </Route>
     </Routes>
   </BrowserRouter>
+  
+  
 );
