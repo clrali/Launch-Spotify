@@ -33,7 +33,7 @@ const Navbar = () => {
           variant="persistent"
         >
           <Button sx={{margin: 2}} variant={useLocation().pathname === "/home" ? "outlined" : "text"} component={Link} to="/home" startIcon={useLocation().pathname === "/home" ? <HomeIcon sx={{fontSize: '40px'}}/> : <HomeOutlinedIcon sx={{fontSize: '40px'}}/>}>
-            <Typography fontSize='28px'>Home</Typography>
+            <Typography fontSize='28px' fontFamily="Roboto">Home</Typography>
           </Button>
           <Button sx={{margin: 2}} variant={useLocation().pathname === "/liked" ? "outlined" : "text"} component={Link} to="/liked" startIcon={useLocation().pathname === "/liked" ? <FavoriteIcon/> : <FavoriteBorderOutlinedIcon/>}>
             Liked SongsS
