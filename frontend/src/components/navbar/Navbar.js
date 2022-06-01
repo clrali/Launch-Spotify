@@ -2,14 +2,8 @@
 import { Link, useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
-import { AppBar } from "@mui/material";
 import "./Navbar";
 import {
-  List,
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Drawer,
   Box,
 } from "@mui/material";
@@ -26,9 +20,9 @@ import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 
-const Navbar = (props) => {
+const Navbar = () => {
   return (
-    <div className="fonts">
+    <div>
       <Box>
         <Drawer
           PaperProps={{
@@ -39,11 +33,11 @@ const Navbar = (props) => {
           open={true}
           variant="persistent"
         >
-          <Button sx={{margin: 2}} variant={useLocation().pathname === "/home" ? "outlined" : "text"} component={Link} to="/home" startIcon={useLocation().pathname === "/home" ? <HomeIcon/> : <HomeOutlinedIcon/>}>
-            <Typography>Home</Typography>
+          <Button sx={{margin: 2}} variant={useLocation().pathname === "/home" ? "outlined" : "text"} component={Link} to="/home" startIcon={useLocation().pathname === "/home" ? <HomeIcon sx={{fontSize: '40px'}}/> : <HomeOutlinedIcon sx={{fontSize: '40px'}}/>}>
+            <Typography fontSize='28px'>Home</Typography>
           </Button>
           <Button sx={{margin: 2}} variant={useLocation().pathname === "/liked" ? "outlined" : "text"} component={Link} to="/liked" startIcon={useLocation().pathname === "/liked" ? <FavoriteIcon/> : <FavoriteBorderOutlinedIcon/>}>
-            Liked Songs
+            Liked SongsS
           </Button>
           <Button sx={{margin: 2}} variant={useLocation().pathname === "/top" ? "outlined" : "text"} component={Link} to="/top" startIcon={useLocation().pathname === "/top" ? <BarChartIcon/> : <BarChartOutlinedIcon/>}>
             Top Songs
