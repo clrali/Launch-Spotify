@@ -47,14 +47,10 @@ router.get("/messages", async (req, res, next) => {
 router.get("/callback", async (req, res, next) => {
   try {
     const code = req.query.code;
-    //console.log(req.query)
     const url =
-      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" +
-      code +
-      "&redirect_uri=" +
-      redirect_uri;
+      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirect_uri;
     const headers = {
-      Authorization:
+      "Authorization":
         "Basic " +
         Buffer.from(client_id + ":" + client_secret, "utf8").toString("base64"),
       "Content-Type": "application/x-www-form-urlencoded",
@@ -63,9 +59,7 @@ router.get("/callback", async (req, res, next) => {
       .catch((err) => console.log(err))
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data)
         obj = {
-          url: "http://localhost:3000/home",
           token: data.access_token,
         };
         return obj;

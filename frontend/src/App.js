@@ -12,17 +12,14 @@ function App() {
 
   return (
     <div className="background--custom">
-    <div className="App">
-    <UserContext.Provider value ={{user, setUser}}>
-      <Navbar />
-      <Outlet />
-      </UserContext.Provider>
-      {useLocation().pathname === "/" && <Login/>} 
-
+      <div className="App">
+      <UserContext.Provider value ={{user, setUser}}>
+        <Navbar />
+        <Outlet />
+        </UserContext.Provider>
+        {useLocation().pathname === "/" && <Login/>} 
+      </div>
     </div>
-    </div>
-
-
   );
 }
 
