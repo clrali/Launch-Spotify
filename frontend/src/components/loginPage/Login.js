@@ -8,13 +8,14 @@ import {
 } from "@mui/material";
 import React from "react";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
   const navigate = useNavigate();
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
+
 
   const onClick = (e) => {
     fetch("http://localhost:9000/spotify")
@@ -25,6 +26,7 @@ const Login = (props) => {
   };
 
   const path = window.location.href.split("/")[3];
+  
   let code = "";
   useEffect(() => {
     if (path) {
@@ -33,14 +35,14 @@ const Login = (props) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.token) {
-            setAccessToken(data.token);
-            //console.log(data.token)
-            navigate("/home");
+			  console.log("token: ", data.token)
+			  setAccessToken(data.token);
+			  navigate("/home");
           }
-          //setAccessToken(data.access_token)
-          //setRefreshToken(data.refresh_token)
         });
     }
+	console.log(accessToken)
+
   }, []);
 
   return (

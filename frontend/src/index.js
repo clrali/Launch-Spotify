@@ -22,7 +22,6 @@ root.render(
       <Route path="/" element={<App />}>
         <Route path="/messages" element={<Messages />} />
 
-        <Route path="/likedsongs" element={<LikedSongs />} />
         <Route path="/forum" element={<Forum />} />
 
         <Route path="/login" element={<Login />} />
