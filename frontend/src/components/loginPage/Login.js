@@ -11,10 +11,12 @@ import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 const Login = (props) => {
   const navigate = useNavigate();
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
+  const { user, setUser} = useContext(UserContext);
 
 
   const onClick = (e) => {
