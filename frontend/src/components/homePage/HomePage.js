@@ -14,9 +14,12 @@ import {
   Paper,
   Grid,
   styled,
-  Avatar,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
 } from "@mui/material";
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,30 +30,30 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const commonStyles = {
-  bgcolor: '#ADD8E6',
-  borderColor: 'text.primary',
+  bgcolor: "white",
   m: 1,
-  border: 1,
-  width: '80vh',
+  width: "80vh",
 };
-
 
 const HomePage = (props) => {
   const [users, setUsers] = useState([]);
 
   const printUsers = async () => {
-    const documents = await getDocs(collection(db, "students"));
-    console.log(documents);
-    let list = [];
-    documents.forEach((student) =>
-      list.push({ id: student.id, ...student.data() })
-    );
-    setUsers(list);
+    fetch("http://localhost:9000/profile/info?myParam=10")
+      .then((res) => res.json())
+      .then((text) => {
+        setUsers(text.result);
+        console.log(text);
+      });
   };
 
   useEffect(() => {
     printUsers();
   }, []);
+
+  const onClick = (event) => {
+    console.log('clicked!')
+  }
 
   return (
     <>
@@ -67,16 +70,15 @@ const HomePage = (props) => {
           component="nav"
           aria-label="mailbox folders"
         >
-          {students.map((student) => {
-            console.log(student);
+          {users.map((user) => {
+            console.log(user);
             return (
-              <EditStudent
-                studentId={student.id}
-                firstname={student.firstname}
-                lastname={student.lastname}
-                birthday={student.birthday}
-                grade={student.grade}
-              />
+              <div>
+              <ListItem onClick={(e) => onClick(e)}>
+                  <ListItemText primary={<p>{user.user}</p>} fontSize="1em"/>
+              </ListItem>
+              <Divider light/>
+              </div>
             );
           })}
         </List>
