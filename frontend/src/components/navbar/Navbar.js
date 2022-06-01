@@ -39,9 +39,6 @@ const Navbar = (props) => {
     <div className="fonts">
       
 
-const Navbar = () => {
-  return (
-    <div>
 
       <Box>
         <Drawer
