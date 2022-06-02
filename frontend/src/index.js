@@ -25,7 +25,7 @@ root.render(
           <Route path="/home" element={<HomePage />} />
           <Route path="/liked" element={<LikedSongs />} />
           <Route path="/top" element={<TopSongs />} />
-          <Route path="/artist" element={<TopArtists />} />
+          <Route path="/artists" element={<TopArtists />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
