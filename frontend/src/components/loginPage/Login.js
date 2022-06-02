@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";
@@ -16,7 +16,8 @@ import { UserContext } from "../../UserContext";
 const Login = (props) => {
   const navigate = useNavigate();
   const { accessToken, setAccessToken } = useContext(AccessTokenContext);
-  const { user, setUser} = useContext(UserContext);
+//   const { user, setUser} = useContext(UserContext);
+
 
   const onClick = (e) => {
     fetch("http://localhost:9000/spotify")
@@ -27,23 +28,22 @@ const Login = (props) => {
   };
 
   const path = window.location.href.split("/")[3];
-  let code = "";
-  useEffect(() => {
-    if (path) {
-      code = path.split("=")[1];
-      fetch("http://localhost:9000/spotify/callback?code=" + code)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.token) {
-            setAccessToken(data.token);
-            //console.log(data.token)
-            navigate("/home");
-          }
-          //setAccessToken(data.access_token)
-          //setRefreshToken(data.refresh_token)
-        });
-    }
-  }, []);
+  let code = ''
+  
+  useEffect(()=> {
+	if(path){
+		code = path.split('=')[1]
+		fetch('http://localhost:9000/spotify/callback?code=' + code)
+		.then(res => res.json())
+		.then(data => {
+			if(data.token){
+				setAccessToken(data.token)
+				console.log("token is set")
+				navigate('/home')
+			}  
+		})
+	}
+	}, [])
 
   return (
     <div

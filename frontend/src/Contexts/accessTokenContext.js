@@ -5,7 +5,8 @@ const AccessTokenContext = createContext("");
 function AccessTokenProvider({ children }) {
   const [accessToken, setAccessToken] = useState("");
   const obj = { accessToken: accessToken, setAccessToken: setAccessToken };
-  // console.log(obj)
+  console.log(obj)
+  
   return (
     <AccessTokenContext.Provider value={obj}>
       {children}
