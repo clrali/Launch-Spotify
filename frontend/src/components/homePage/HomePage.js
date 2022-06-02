@@ -18,6 +18,12 @@ import {
   ListItem,
   ListItemText,
   Divider,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  ListItemAvatar,
+  ListItemButton,
+  Avatar,
 } from "@mui/material";
 import React, { useEffect, useState, useRef } from "react";
 
@@ -52,8 +58,8 @@ const HomePage = (props) => {
   }, []);
 
   const onClick = (event) => {
-    console.log('clicked!')
-  }
+    console.log("clicked!");
+  };
 
   return (
     <>
@@ -74,10 +80,25 @@ const HomePage = (props) => {
             console.log(user);
             return (
               <div>
-              <ListItem onClick={(e) => onClick(e)}>
+                <ListItem
+                  disablePadding
+                >
+                  <ListItemButton>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt={'example'}
+                        src={'source'}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={user.user}
+                    />
+                  </ListItemButton>
+                </ListItem>
+                {/*<ListItem onClick={(e) => onClick(e)}>
                   <ListItemText primary={<p>{user.user}</p>} fontSize="1em"/>
-              </ListItem>
-              <Divider light/>
+            </ListItem>*/}
+                <Divider light />
               </div>
             );
           })}
