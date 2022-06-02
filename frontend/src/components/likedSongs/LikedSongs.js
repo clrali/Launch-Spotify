@@ -17,7 +17,7 @@ function LikedSongs() {
     const [songs, setSongs] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:9000/users/tracks?token=" + accessToken)
+        fetch("http://localhost:9000/users/likedsongs?token=" + accessToken)
         .then(res => res.json())
         .then(data => {
             setSongs(data.items)
@@ -27,9 +27,6 @@ function LikedSongs() {
     }, [])
     
     return (
-
-        
-
         <div>
             <h1>Liked Songs</h1>
             {songs.length > 0 && 
@@ -51,6 +48,7 @@ function LikedSongs() {
                                 size="small" 
                                 href={val.track.preview_url} 
                                 target="_blank"
+                                variant="outlined"
                                 style={{margin: '0 auto', display: "flex"}}>
                                     Preview Song
                                 </Button>
@@ -61,9 +59,7 @@ function LikedSongs() {
                     )
             })
             }
-
         </div>
-        
     )
 }
 

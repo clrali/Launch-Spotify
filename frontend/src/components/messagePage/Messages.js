@@ -3,24 +3,60 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SearchIcon from "@mui/icons-material/Search";
 import {
-  Button,
   AppBar,
   Box,
   IconButton,
-  Toolbar,
-  Stack,
   Card,
   InputBase,
   Paper,
   Grid,
+  TextField,
+  Button
 } from "@mui/material";
-import { useContext } from "react";
-import { UserContext } from "../../UserContext";
+import { useEffect, useState, useRef, useContext } from "react";
 import MessageBody from "./MessageBody";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import Messengers from "./Messengers";
+import { UserContext } from '../../Contexts/UserContext';
 
-const Messages = (props) => {
-	const {user, setUser} = useContext(UserContext);
-	console.log(user);
+const Messages = () => {
+
+
+  const textFieldRefMessage = useRef(null);
+  const { user } = useContext(UserContext);
+  const [messages, setMessages] = useState([]);
+  const [nothing, setNothing] = useState(false);
+  const [messengers, setMessengers] = useState([]);
+  const [messenger, setMessenger] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:9000/spotify/messengers")
+      .then((res) => res.json())
+      .then((text) => {
+        setMessengers(text.result);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const updateMessages = () => {
+    fetch("http://localhost:9000/spotify/messages?id=" + messenger)
+      .then((res) => res.json())
+      .then((text) => {
+        if (text.result.length === 0) {
+          setNothing(true);
+        }
+        if (text.result.length !== 0) {
+          setNothing(false);
+        }
+        setMessages(text.result);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const sendMessage = () => {
+
+  };
+
   return (
     <>
       <AppBar color="primary">
@@ -28,7 +64,7 @@ const Messages = (props) => {
           <IconButton size="large" aria-label="back" variant="contained">
             <ArrowBackIosIcon color="secondary" />
           </IconButton>
-          <IconButton size="large" aria-label="back" variant="contained">
+          <IconButton size="large" aria-label="forward" variant="contained">
             <ArrowForwardIosIcon color="secondary" />
           </IconButton>
         </Box>
@@ -40,7 +76,7 @@ const Messages = (props) => {
           marginTop: "3%",
           marginLeft: "30%",
           marginRight: "25%",
-          paddingBottom: "18%",
+          paddingBottom: "29.5%",
           boxShadow: 7,
           borderRadius: 2,
         }}
@@ -67,21 +103,37 @@ const Messages = (props) => {
             </Paper>
           </Grid>
           <Grid item xs={6}>
-            <Typography> User </Typography>
+            <Typography>
+              {messenger}
+              <IconButton onClick={updateMessages}>
+                <RefreshIcon />
+              </IconButton>
+            </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Stack>
-              <Button variant="text"> User1 </Button>
-              <Button variant="text"> User2 </Button>
-              <Button variant="text"> User3 </Button>
-              <Button variant="text"> User4 </Button>
-            </Stack>
+            <Messengers
+              messengers={messengers}
+              setMessenger={setMessenger}
+              update={updateMessages}
+            ></Messengers>
           </Grid>
           <Grid item xs={6}>
-            <MessageBody></MessageBody>
+            <MessageBody messages={messages} nothing={nothing}></MessageBody>
+          </Grid>
+          <Grid item xs={6}></Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="standard-basic"
+              label="Send a Message"
+              variant="standard"
+              inputRef={textFieldRefMessage}
+            ></TextField>
           </Grid>
         </Grid>
       </Card>
+      <Button onClick={console.log(user)}>
+        Click me
+      </Button>
     </>
   );
 };
