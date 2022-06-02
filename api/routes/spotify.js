@@ -13,10 +13,11 @@ const {
   updateDoc
 } = require("firebase/firestore");
 
-const client_id = process.env.clientId;
-const client_secret = process.env.clientSecret;
-const redirect_uri = process.env.redirectURI;
+const client_id = "fe69a3c9692249358020d4a7cabd0df4";
+const client_secret = "d3f7397926fa4b1592abf9046355b052";
+const redirect_uri = "http://localhost:3000";
 const scope = "user-top-read user-library-read"; //<- needs to be updated based on what you want to dogit
+let access_token = null;
 
 router.get("/", async (req, res, next) => {
   try {
@@ -77,6 +78,7 @@ router.get("/callback", async (req, res, next) => {
         obj = {
           token: data.access_token,
         };
+        access_token = data.access_token;
         return obj;
       })
       .then((obj) => res.json(obj));
@@ -85,5 +87,21 @@ router.get("/callback", async (req, res, next) => {
     res.status(500).send(err);
   }
 });
+
+router.get('/user', async (req, res, next) => {
+  try{
+      const url = 'https://api.spotify.com/v1/me'
+      const data = await fetch(url, {headers: {
+          'Authorization': 'Bearer ' + req.query.temp
+      }}).catch(err=> console.log(err))
+          .then(res=> res.json())
+          .then(data => data)
+      return res.status(200).json(data)
+  }
+  catch(err){
+      console.log(err)
+      return res.status(500).json(err)
+  }
+})
 
 module.exports = router;
