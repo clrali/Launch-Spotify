@@ -36,9 +36,19 @@ router.get("/", async (req, res, next) => {
 
 router.get("/messages", async (req, res, next) => {
   const messages = [];
-  const docs = await getDocs(collection(db, "profile/" + req.query.user + "/messengers/" + req.query.messenger + "/messages"));
+  const docs = await getDocs(collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers", req.query.id, "messages"));
   docs.forEach((message) =>
     messages.push({ ...message.data() })
+  );
+  console.log(messages);
+  res.json({ result: messages });
+});
+
+router.get("/messengers", async (req, res, next) => {
+  const messages = [];
+  const docs = await getDocs(collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers"));
+  docs.forEach((message) =>
+    messages.push({ id: message.id })
   );
   console.log(messages);
   res.json({ result: messages });

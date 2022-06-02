@@ -3,24 +3,52 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SearchIcon from "@mui/icons-material/Search";
 import {
-  Button,
   AppBar,
   Box,
   IconButton,
-  Toolbar,
-  Stack,
   Card,
   InputBase,
   Paper,
   Grid,
 } from "@mui/material";
-import { useContext } from "react";
-import { UserContext } from "../../UserContext";
+import { useEffect, useState } from "react";
+//import { UserContext } from "../../UserContext";
 import MessageBody from "./MessageBody";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import Messengers from "./Messengers";
 
-const Messages = (props) => {
-	const {user, setUser} = useContext(UserContext);
-	console.log(user);
+const Messages = () => {
+
+  //const { user, setUser } = useContext(UserContext);
+  const [messages, setMessages] = useState([]);
+  const [nothing, setNothing] = useState(false);
+  const [messengers, setMessengers] = useState([]);
+  const [messenger, setMessenger] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:9000/spotify/messengers")
+    .then((res) => res.json())
+    .then((text) => {
+        setMessengers(text.result);
+    })
+    .catch((err) => console.log(err))
+}, [])
+
+  function updateMessages() {
+    fetch("http://localhost:9000/spotify/messages?id=" + messenger)
+    .then((res) => res.json())
+    .then((text) => {
+        if (text.result.length === 0) {
+            setNothing(true);
+          }
+        if (text.result.length !== 0) {
+            setNothing(false);
+        }
+        setMessages(text.result);
+    })
+    .catch((err) => console.log(err))
+  };
+
   return (
     <>
       <AppBar color="primary">
@@ -67,18 +95,18 @@ const Messages = (props) => {
             </Paper>
           </Grid>
           <Grid item xs={6}>
-            <Typography> User </Typography>
+            <Typography>
+              {messenger}
+              <IconButton onClick={updateMessages}>
+                <RefreshIcon />
+              </IconButton>
+            </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Stack>
-              <Button variant="text"> User1 </Button>
-              <Button variant="text"> User2 </Button>
-              <Button variant="text"> User3 </Button>
-              <Button variant="text"> User4 </Button>
-            </Stack>
+            <Messengers messengers = {messengers} setMessenger = {setMessenger} update={updateMessages}> </Messengers>
           </Grid>
           <Grid item xs={6}>
-            <MessageBody></MessageBody>
+            <MessageBody messages = {messages} nothing = {nothing}></MessageBody>
           </Grid>
         </Grid>
       </Card>
