@@ -54,6 +54,11 @@ router.get("/messengers", async (req, res, next) => {
   res.json({ result: messages });
 });
 
+router.post("/message", async (req, res, next) => {
+  await addDoc(collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers", req.query.to), req.body);
+  await addDoc(collection(db, "profile", "qpMmWYxnS3u4DXd8zKLb", "messengers", req.query.from), req.body);
+});
+
 router.get("/callback", async (req, res, next) => {
   try {
     const code = req.query.code;

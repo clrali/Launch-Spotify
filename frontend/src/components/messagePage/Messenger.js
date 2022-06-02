@@ -7,7 +7,6 @@ const Messenger = (props) => {
     props.update();
   }
 
-
   return (
     <Button variant='text' onClick={clicked}>
       {props.user}
