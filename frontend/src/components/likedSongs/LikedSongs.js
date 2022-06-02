@@ -1,13 +1,24 @@
+
+import {
+    Typography,
+    Card,
+    CardContent,
+    Box,
+    Grid,
+    Button,
+} from "@mui/material";
+import { Container } from "react-bootstrap"
+import "bootstrap/dist/css/bootstrap.css"
+
 import React from 'react'
 import { AccessTokenContext } from '../../Contexts/accessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+
 function LikedSongs() {
     
-    console.log("currently in liked songs file")
-
     const { accessToken } = useContext(AccessTokenContext);
     const [songs, setSongs] = useState([])
 
@@ -17,10 +28,14 @@ function LikedSongs() {
         .then(data => {
             setSongs(data.items)
         })
+
     }, [])
    
     console.log(songs)
     return (
+
+        
+
         <div>
             <h1>Liked Songs</h1>
             {songs.length > 0 && 
@@ -28,7 +43,9 @@ function LikedSongs() {
                     return <p>{val.track.name} by {val.track.artists[0].name}</p>
             })
             }
+
         </div>
+        
     )
 }
 
