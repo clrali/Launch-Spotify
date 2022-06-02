@@ -36,13 +36,13 @@ function TopSongs() {
                           <div>
                           <CardContent>
                               <Typography sx={{ fontSize: 18 }} color="text.primary" gutterBottom>
-                                  {val.album.name} by {val.album.artists[0].name}
+                                  {val.name} by {val.album.artists[0].name}
                               </Typography>
                           </CardContent>
                           <CardActions>
                               <Button 
                               size="small" 
-                              href={val.album.preview_url} 
+                              href={val.preview_url} 
                               target="_blank"
                               style={{margin: '0 auto', display: "flex"}}>
                                   Preview Song
