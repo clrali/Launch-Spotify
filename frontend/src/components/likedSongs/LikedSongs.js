@@ -21,6 +21,7 @@ function LikedSongs() {
         .then(res => res.json())
         .then(data => {
             setSongs(data.items)
+            console.log(data)
         })
 
     }, [])

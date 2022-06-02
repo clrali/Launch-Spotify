@@ -1,16 +1,10 @@
-import Typography from "@mui/material/Typography";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SearchIcon from "@mui/icons-material/Search";
+import { SecondaryTokenContext } from "../../Contexts/secondaryTokenContext";
 import {
   Button,
   AppBar,
-  Box,
-  IconButton,
-  Toolbar,
-  Stack,
-  Card,
-  InputBase,
   Paper,
   Grid,
   styled,
@@ -25,7 +19,7 @@ import {
   ListItemButton,
   Avatar,
 } from "@mui/material";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -43,6 +37,7 @@ const commonStyles = {
 
 const HomePage = (props) => {
   const [users, setUsers] = useState([]);
+  const { accessToken, setAccessToken } = useContext(SecondaryTokenContext);
 
   const printUsers = async () => {
     fetch("http://localhost:9000/profile/info?myParam=10")
