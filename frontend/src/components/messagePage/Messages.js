@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SearchIcon from "@mui/icons-material/Search";
+import {Helmet} from "react-helmet";
 import {
   Button,
   AppBar,
@@ -23,6 +24,9 @@ const Messages = (props) => {
 	console.log(user);
   return (
     <>
+    <Helmet>
+        <title>Messages</title>
+      </Helmet>
       <AppBar color="primary">
         <Box>
           <IconButton size="large" aria-label="back" variant="contained">

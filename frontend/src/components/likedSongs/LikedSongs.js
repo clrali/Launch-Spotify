@@ -14,6 +14,7 @@ import { AccessTokenContext } from '../../Contexts/accessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {Helmet} from "react-helmet";
 
 
 function LikedSongs() {
@@ -36,6 +37,9 @@ function LikedSongs() {
         
 
         <div>
+            <Helmet>
+            <title>Liked Songs</title>
+            </Helmet>
             <h1>Liked Songs</h1>
             {songs.length > 0 && 
                 songs.map((val, key) => {

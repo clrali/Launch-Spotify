@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import {Container} from "react-bootstrap"
 import { fontSize } from "@mui/system";
+import {Helmet} from "react-helmet";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const Login = (props) => {
 
   return (
     <div
+    
             style={{
                 background: "linear-gradient(#e66465, #9198e5)",
                 height: "100vh",
@@ -58,6 +60,9 @@ const Login = (props) => {
             }}
         >
             <div>
+            <Helmet>
+            <title>Login</title>
+            </Helmet>
                 <Card
                     sx={{
                         borderRadius: "20px",
