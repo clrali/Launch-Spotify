@@ -1,3 +1,14 @@
+import {
+    Typography,
+    Card,
+    CardContent,
+    Box,
+    Grid,
+    Button,
+} from "@mui/material";
+import { Container } from "react-bootstrap"
+import "bootstrap/dist/css/bootstrap.css"
+
 import React from 'react'
 import { AccessTokenContext } from '../../Contexts/accessTokenContext';
 import { useContext } from 'react';
@@ -11,8 +22,8 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Box from '@mui/material/Box'
 
-function LikedSongs() {
 
+function LikedSongs() {
     const { accessToken } = useContext(AccessTokenContext);
     const [songs, setSongs] = useState([])
 
@@ -22,9 +33,13 @@ function LikedSongs() {
         .then(data => {
             setSongs(data.items)
         })
+
     }, [])
     
     return (
+
+        
+
         <div>
             <h1>Liked Songs</h1>
             {songs.length > 0 && 
@@ -56,7 +71,9 @@ function LikedSongs() {
                     )
             })
             }
+
         </div>
+        
     )
 }
 
