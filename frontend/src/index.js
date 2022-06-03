@@ -7,9 +7,6 @@ import ErrorPage from './components/navbar/ErrorPage';
 import Messages from './components/messagePage/Messages';
 import Login from './components/loginPage/Login';
 import LikedSongs from './components/likedSongs/LikedSongs';
-import LikedMonth from './components/likedSongs/LikedMonth';
-import LikedYear from './components/likedSongs/LikedYear';
-import LikedAll from './components/likedSongs/LikedAll';
 import HomePage from './components/homePage/HomePage';
 import Forum from './components/forum/Forum'
 import TopSongs from './components/topSongs/TopSongs';
@@ -17,13 +14,11 @@ import TopArtists from './components/topArtists/TopArtists';
 import ArtistsMonth from './components/topArtists/ArtistsMonth'
 import ArtistsYear from './components/topArtists/ArtistsYear'
 import ArtistsAll from './components/topArtists/ArtistsAll'
-import AccessTokenProvider, { AccessTokenContext } from './Contexts/accessTokenContext';
+import AccessTokenProvider from './Contexts/accessTokenContext';
 import TopAll from './components/topSongs/TopAll';
 import TopMonth from './components/topSongs/TopMonth';
 import TopYear from './components/topSongs/TopYear';
-
 import UserProvider from "./Contexts/UserContext";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -44,9 +39,6 @@ root.render(
           <Route path='/artists/month' element={<ArtistsMonth />} />
           <Route path='/artists/year' element={<ArtistsYear />} />
           <Route path='/artists/all' element={<ArtistsAll />} />
-          <Route path="/liked/month" element={<LikedMonth />} />
-          <Route path='/liked/year' element={<LikedYear />} />
-          <Route path='/liked/all' element={<LikedAll />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>

@@ -5,11 +5,6 @@ import { AppBar } from "@mui/material";
 import "./Navbar";
 import { ThemeProvider, createMuiTheme } from '@mui/material'
 import {
-  List,
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Drawer,
   Box,
 } from "@mui/material";
