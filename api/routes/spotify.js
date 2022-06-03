@@ -9,8 +9,8 @@ const {
   addDoc,
   deleteDoc,
   doc,
-  getDoc,
-  updateDoc
+  setDoc,
+  updateDoc,
 } = require("firebase/firestore");
 
 const client_id = "fe69a3c9692249358020d4a7cabd0df4";
@@ -87,6 +87,27 @@ router.get("/callback", async (req, res, next) => {
     res.status(500).send(err);
   }
 });
+
+router.post("/userCreation", async (req, res, next) => {
+  await setDoc(doc(db, "profile", req.body.name), {name: req.body.name});
+  
+  const url = "https://api.spotify.com/v1/me/tracks?offset=0&limit=10";
+  await fetch(url, {
+    headers: {
+      Authorization: "Bearer " + req.query.token,
+    },
+  })
+    .catch((err) => console.log(err))
+    .then((res) => res.json())
+    .then((data) =>
+      data.items.map((val, key) => {
+        setDoc(doc(db, "profile", req.body.name, "spotifyData", "likedSongs"), {
+          title: val.track.name
+        });
+      })
+    );
+    return res.json({message: "It works"});
+ });
 
 router.get('/user', async (req, res, next) => {
   try{

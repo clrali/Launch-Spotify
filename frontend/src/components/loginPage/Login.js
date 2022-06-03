@@ -33,10 +33,17 @@ const Login = (props) => {
             setAccessToken(data.token);
             fetch("http://localhost:9000/spotify/user?temp=" + data.token)
               .then((res) => res.json())
-              .then((data) => {
-                console.log(data);
-                setUser(data.display_name);
-                console.log(data.display_name);
+              .then((meta) => {
+                console.log(meta.display_name);
+                fetch(
+                  "http://localhost:9000/spotify/userCreation?token=" + data.token,
+                  {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({name: meta.display_name}),
+                  }
+                ).then((res) => console.log(res.json()))
+                setUser(meta.display_name);
                 navigate("/home");
               });
             console.log("token is set");
