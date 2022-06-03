@@ -23,7 +23,13 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import React, { useEffect, useState, useRef, setState, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  setState,
+  useContext,
+} from "react";
 import { OtherContext } from "../../Contexts/OtherContext";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -36,27 +42,57 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 
 const OtherProfile = (props) => {
   const [liked, setLiked] = useState([]);
+  const [top, setTop] = useState([]);
+  const [artist, setArtist] = useState([]);
   const { other, setOther } = useContext(OtherContext);
-
-  console.log(other)
+  const [bio, setBio] = useState([])
 
   const getLiked = async () => {
-    let likedUrl = "http://localhost:9000/profile/likedSongs/" + other
-    let url = likedUrl.replace(" ", "%20")
+    let likedUrl = "http://localhost:9000/profile/likedSongs/" + other;
+    let url = likedUrl.replace(" ", "%20");
     fetch(url)
       .then((res) => res.json())
       .then((text) => {
         setLiked(text.result);
-        console.log(text);
-        console.log(text.result);
+      });
+  };
+
+  const getTop = async () => {
+    let likedUrl = "http://localhost:9000/profile/topSongs/" + other;
+    let url = likedUrl.replace(" ", "%20");
+    fetch(url)
+      .then((res) => res.json())
+      .then((text) => {
+        setTop(text.result);
+      });
+  };
+
+  const getArtists = async () => {
+    let likedUrl = "http://localhost:9000/profile/topArtists/" + other;
+    let url = likedUrl.replace(" ", "%20");
+    fetch(url)
+      .then((res) => res.json())
+      .then((text) => {
+        setArtist(text.result);
+      });
+  };
+
+  const getBio = async () => {
+    let likedUrl = "http://localhost:9000/profile/userInfo/" + other;
+    let url = likedUrl.replace(" ", "%20");
+    fetch(url)
+      .then((res) => res.json())
+      .then((text) => {
+        setBio(text.result.bio);
+        console.log(text.result.bio)
       });
   };
 
   useEffect(() => {
     getLiked();
+    getTop();
+    getArtists();
   }, []);
-
-
 
   return (
     <>
@@ -82,7 +118,11 @@ const OtherProfile = (props) => {
               p: 10,
               minWidth: 400,
             }}
-          ></StyledPaper>
+          >
+            <Typography>
+              Hello this is my bio!
+            </Typography>
+          </StyledPaper>
         </Box>
       </Grid>
       <Box
@@ -139,22 +179,38 @@ const OtherProfile = (props) => {
             minWidth: 900,
           }}
         >
-          {" "}
-          <Card sx={{ maxWidth: 100 }}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="50"
-                image="example"
-                alt="example song"
-              />
-              <CardContent>
-                <Typography variant="h9" component="div">
-                  Song example
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+          <Box
+            sx={{
+              display: "flex",
+              "& > :not(style)": {
+                m: 1,
+                marginRight: "2%",
+              },
+            }}
+          >
+            {top.map((topS) => {
+              return (
+                <Card sx={{ width: 125, height: 125 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="50"
+                      image={topS.cover}
+                      alt="example song"
+                    />
+                    <CardContent>
+                      <Typography variant="h9" component="div">
+                        {topS.title}
+                      </Typography>
+                      <Typography variant="body6" color="text.secondary">
+                        {topS.artist}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              );
+            })}
+          </Box>
         </StyledPaper>
         <StyledPaper
           sx={{
@@ -163,22 +219,35 @@ const OtherProfile = (props) => {
             minWidth: 900,
           }}
         >
-          {" "}
-          <Card sx={{ maxWidth: 100 }}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="50"
-                image="example"
-                alt="example song"
-              />
-              <CardContent>
-                <Typography variant="h9" component="div">
-                  Song example
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+          <Box
+            sx={{
+              display: "flex",
+              "& > :not(style)": {
+                m: 1,
+                marginRight: "2%",
+              },
+            }}
+          >
+            {artist.map((artistS) => {
+              return (
+                <Card sx={{ width: 125, height: 125 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="50"
+                      image={artistS.cover}
+                      alt="example song"
+                    />
+                    <CardContent>
+                      <Typography variant="h9" component="div">
+                        {artistS.name}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              );
+            })}
+          </Box>
         </StyledPaper>
       </Box>
     </>

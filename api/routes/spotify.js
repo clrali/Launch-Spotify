@@ -139,6 +139,44 @@ router.post("/userCreation", async (req, res, next) => {
         );
       })
     );
+  const topurl =
+    "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=10&time_range=long_term";
+  await fetch(topurl, {
+    headers: {
+      Authorization: "Bearer " + req.query.token,
+    },
+  })
+    .catch((err) => console.log(err))
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      data.items.map((val, key) => {
+        setDoc(doc(db, "profile", req.body.name, "topSongs", val.name), {
+          title: val.name,
+          cover: val.album.images[0].url,
+          artist: val.artists[0].name,
+        });
+      });
+    });
+
+  const artisturl =
+    "https://api.spotify.com/v1/me/top/artists?offset=0&limit=10&time_range=long_term";
+  await fetch(artisturl, {
+    headers: {
+      Authorization: "Bearer " + req.query.token,
+    },
+  })
+    .catch((err) => console.log(err))
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      data.items.map((val, key) => {
+        setDoc(doc(db, "profile", req.body.name, "topArtists", val.name), {
+          name: val.name,
+          cover: val.images[0].url,
+        });
+      });
+    });
   return res.json({ message: "It works" });
 });
 
