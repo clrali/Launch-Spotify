@@ -5,7 +5,7 @@ function Message(props) {
   return (
     <Card
     >
-      <h3>{props.user}:</h3>
+      <h5><strong>{props.user}</strong>:</h5>
       <p>{props.messages}</p>
     </Card>
   );

@@ -155,7 +155,7 @@ useEffect(() => {
           </Grid>
           <Grid item xs={6}>
             <Typography>
-              {messenger}
+            <h4><strong>{messenger}</strong>:</h4>
               <IconButton onClick={updateMessages}>
                 <RefreshIcon />
               </IconButton>
