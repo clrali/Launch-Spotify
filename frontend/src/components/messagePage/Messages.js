@@ -11,16 +11,19 @@ import {
   Paper,
   Grid,
   TextField,
+  Button
 } from "@mui/material";
-import { useEffect, useState, useRef } from "react";
-//import { UserContext } from "../../UserContext";
+import { useEffect, useState, useRef, useContext } from "react";
 import MessageBody from "./MessageBody";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import Messengers from "./Messengers";
+import { UserContext } from '../../Contexts/UserContext';
 
 const Messages = () => {
+
+
   const textFieldRefMessage = useRef(null);
-  //const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [messages, setMessages] = useState([]);
   const [nothing, setNothing] = useState(false);
   const [messengers, setMessengers] = useState([]);
@@ -51,7 +54,7 @@ const Messages = () => {
   };
 
   const sendMessage = () => {
-    
+
   };
 
   return (
@@ -128,6 +131,9 @@ const Messages = () => {
           </Grid>
         </Grid>
       </Card>
+      <Button onClick={console.log(user)}>
+        Click me
+      </Button>
     </>
   );
 };

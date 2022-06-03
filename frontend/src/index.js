@@ -22,9 +22,13 @@ import TopAll from './components/topSongs/TopAll';
 import TopMonth from './components/topSongs/TopMonth';
 import TopYear from './components/topSongs/TopYear';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import UserProvider from "./Contexts/UserContext";
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <AccessTokenProvider>
+  <AccessTokenProvider>
+    <UserProvider>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
@@ -47,6 +51,6 @@ root.render(
         </Route>
       </Routes>
       </BrowserRouter>
-    </AccessTokenProvider>
-  
+    </UserProvider>
+  </AccessTokenProvider>
 );
