@@ -71,9 +71,12 @@ router.get("/callback", async (req, res, next) => {
   try {
     const code = req.query.code;
     const url =
-      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirect_uri;
+      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" +
+      code +
+      "&redirect_uri=" +
+      redirect_uri;
     const headers = {
-      "Authorization":
+      Authorization:
         "Basic " +
         Buffer.from(client_id + ":" + client_secret, "utf8").toString("base64"),
       "Content-Type": "application/x-www-form-urlencoded",
@@ -113,28 +116,73 @@ router.post("/userCreation", async (req, res, next) => {
     .then((res) => res.json())
     .then((data) =>
       data.items.map((val, key) => {
-        setDoc(doc(db, "profile", req.body.name, "spotifyData", "likedSongs"), {
-          title: val.track.name
-        });
+        setDoc(
+          doc(db, "profile", req.body.name, "likedSongs", val.track.name),
+          {
+            title: val.track.name,
+            cover: val.track.album.images[0].url,
+            artist: val.track.artists[0].name,
+          }
+        );
       })
     );
-    return res.json({message: "It works"});
- });
+  const topurl =
+    "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=10&time_range=long_term";
+  await fetch(topurl, {
+    headers: {
+      Authorization: "Bearer " + req.query.token,
+    },
+  })
+    .catch((err) => console.log(err))
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      data.items.map((val, key) => {
+        setDoc(doc(db, "profile", req.body.name, "topSongs", val.name), {
+          title: val.name,
+          cover: val.album.images[0].url,
+          artist: val.artists[0].name,
+        });
+      });
+    });
 
-router.get('/user', async (req, res, next) => {
-  try{
-      const url = 'https://api.spotify.com/v1/me'
-      const data = await fetch(url, {headers: {
-          'Authorization': 'Bearer ' + req.query.temp
-      }}).catch(err=> console.log(err))
-          .then(res=> res.json())
-          .then(data => data)
-      return res.status(200).json(data)
+  const artisturl =
+    "https://api.spotify.com/v1/me/top/artists?offset=0&limit=10&time_range=long_term";
+  await fetch(artisturl, {
+    headers: {
+      Authorization: "Bearer " + req.query.token,
+    },
+  })
+    .catch((err) => console.log(err))
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      data.items.map((val, key) => {
+        setDoc(doc(db, "profile", req.body.name, "topArtists", val.name), {
+          name: val.name,
+          cover: val.images[0].url,
+        });
+      });
+    });
+  return res.json({ message: "It works" });
+});
+
+router.get("/user", async (req, res, next) => {
+  try {
+    const url = "https://api.spotify.com/v1/me";
+    const data = await fetch(url, {
+      headers: {
+        Authorization: "Bearer " + req.query.temp,
+      },
+    })
+      .catch((err) => console.log(err))
+      .then((res) => res.json())
+      .then((data) => data);
+    return res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
   }
-  catch(err){
-      console.log(err)
-      return res.status(500).json(err)
-  }
-})
+});
 
 module.exports = router;
