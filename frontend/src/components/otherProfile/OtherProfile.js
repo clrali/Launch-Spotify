@@ -23,7 +23,7 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, setState } from "react";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -32,7 +32,24 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   maxWidth: 400,
   color: theme.palette.text.primary,
 }));
+
 const OtherProfile = (props) => {
+  const [liked, setLiked] = useState([]);
+
+  const getLiked = async () => {
+    fetch("http://localhost:9000/profile/likedSongs?myParam=10")
+      .then((res) => res.json())
+      .then((text) => {
+        setLiked(text.result);
+        console.log(text);
+        console.log(text.result[0].title);
+      });
+  };
+
+  useEffect(() => {
+    getLiked();
+  }, []);
+
   return (
     <>
       <Grid sx={{ marginLeft: "20%" }}>
@@ -55,7 +72,7 @@ const OtherProfile = (props) => {
               my: 2,
               mx: "auto",
               p: 10,
-              minWidth: 600,
+              minWidth: 400,
             }}
           ></StyledPaper>
         </Box>
@@ -74,21 +91,35 @@ const OtherProfile = (props) => {
             minWidth: 900,
           }}
         >
-          <Card sx={{ maxWidth: 100 }}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="50"
-                image="example"
-                alt="example song"
-              />
-              <CardContent>
-                <Typography variant="h9" component="div">
-                  Song example
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+          <Box
+            sx={{
+              display: "flex",
+              "& > :not(style)": {
+                m: 1,
+                marginRight: "2%",
+              },
+            }}
+          >
+            {liked.map((like) => {
+              return (
+                <Card sx={{ maxWidth: 150 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="50"
+                      image={liked[0].cover}
+                      alt="example song"
+                    />
+                    <CardContent>
+                      <Typography variant="h9" component="div">
+                        {liked[0].title}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              );
+            })}
+          </Box>
         </StyledPaper>
         <StyledPaper
           sx={{
