@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import CardActions from "@mui/material/CardActions";
+import { Helmet } from "react-helmet";
 
 function LikedSongs() {
   const { accessToken } = useContext(AccessTokenContext);
@@ -21,6 +22,7 @@ function LikedSongs() {
 
   return (
     <div className="background">
+      <Helmet><title>Vocalize - Liked Songs</title></Helmet>
       <h1>Liked Songs</h1>
       {longTermSongs.length > 0 &&
         longTermSongs.map((val, key) => {

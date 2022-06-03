@@ -81,6 +81,7 @@ const Messages = () => {
 
   return (
     <>
+    <Helmet><title>Vocalize - Messaging</title></Helmet>
       <AppBar color="primary">
         <Box>
           <IconButton size="large" aria-label="back" variant="contained">
@@ -157,9 +158,6 @@ const Messages = () => {
           </Grid>
         </Grid>
       </Card>
-      <Button onClick={console.log(user)}>
-        Click me
-      </Button>
     </>
   );
 };
