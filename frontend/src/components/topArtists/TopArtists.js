@@ -1,11 +1,24 @@
+
+import React from 'react'
+import {Helmet} from "react-helmet";
+
 import {  Button } from "@mui/material";
 import React from "react";
 import { Link } from 'react-router-dom'
 import "./TopArtists.css";
 
+
 function TopArtists() {
   return (
     <div>
+
+      <Helmet>
+        <title>Top Artists</title>
+      </Helmet>
+      <h1>
+        Top Artists
+      </h1>
+
       <h1>Top Artists</h1>
       <Button
         component={Link}
@@ -42,6 +55,7 @@ function TopArtists() {
       >
         All Time
       </Button>
+
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import { AppBar } from "@mui/material";
 import "./Navbar";
 import { ThemeProvider, createMuiTheme } from '@mui/material'
+import {Helmet} from "react-helmet";
 import {
   List,
   Divider,
@@ -37,6 +38,9 @@ const Navbar = (props) => {
   return (
     <ThemeProvider theme={theme}>
     <div className="fonts">
+    <Helmet>
+        <title>Navbar</title>
+      </Helmet>
       <Box>
         <Drawer
           PaperProps={{

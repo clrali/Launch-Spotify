@@ -1,7 +1,11 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SearchIcon from "@mui/icons-material/Search";
+
+import {Helmet} from "react-helmet"
+
 import { SecondaryTokenContext } from "../../Contexts/secondaryTokenContext";
+
 import {
   Button,
   AppBar,
@@ -58,6 +62,9 @@ const HomePage = (props) => {
 
   return (
     <>
+    <Helmet>
+        <title>Home Page</title>
+      </Helmet>
       <Grid
         container
         spacing={0}
