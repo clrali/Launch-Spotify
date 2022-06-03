@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Macondo&family=Roboto+Mono:wght@300;400&display=swap");
+
+div {
+  font-family: "Macondo", cursive;
+  font-family: "Roboto Mono", monospace;
+}
+
 .App {
   text-align: center;
 }
@@ -38,8 +45,7 @@
 }
 
 .background--custom {
-
-  background: linear-gradient(90deg, #B3F2EF, #5c62bb, #93dfcc);
+  background: linear-gradient(90deg, #b3f2ef, #5c62bb, #93dfcc);
 
   background-size: 300% 300%;
   /* animation: gradient 4s alternate infinite; */
@@ -49,6 +55,7 @@
   height: 100%;
   width: 100%;
 }
+
 @keyframes gradient {
   0% {
     background-position: 0%;
