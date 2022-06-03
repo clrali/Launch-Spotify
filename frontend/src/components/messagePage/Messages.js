@@ -35,8 +35,14 @@ const Messages = () => {
     fetch("http://localhost:9000/spotify/messengers?id=" + user)
       .then((res) => res.json())
       .then((text) => {
+        for(let i = 0; i < text.result.length; i++) {
+          if (text.result[i].id === user) {
+            text.result.splice(i, 1);
+            i--
+          }
+        }
         setMessengers(text.result);
-      })
+  })
       .catch((err) => console.log(err));
   }, []);
 
