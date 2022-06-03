@@ -101,8 +101,10 @@ router.post("/userCreation", async (req, res, next) => {
     .then((res) => res.json())
     .then((data) =>
       data.items.map((val, key) => {
-        setDoc(doc(db, "profile", req.body.name, "spotifyData", "likedSongs"), {
-          title: val.track.name
+        addDoc(collection(db, "profile", req.body.name, "likedSongs"), {
+          title: val.track.name,
+          cover: val.track.album.images[0].url,
+          artist: val.track.artists[0].name,
         });
       })
     );

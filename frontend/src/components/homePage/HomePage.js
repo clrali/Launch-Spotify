@@ -91,7 +91,7 @@ const HomePage = (props) => {
                       />
                     </ListItemAvatar>
                     <ListItemText
-                      primary={user.user}
+                      primary={user.name}
                     />
                   </ListItemButton>
                 </ListItem>

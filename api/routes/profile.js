@@ -29,8 +29,10 @@ router.get("/likedSongs", async (req, res, next) => {
   // console.log(req.query)  // shows the URL params (stuff after the ? in the URL)
   const docs = await getDocs(collection(db, "profile", "exampleuser", "likedSongs"));
   docs.forEach((doc) => {
+    if (allDocData.length < 5) {
     const object = doc.data();
     allDocData.push(object);
+    }
   });
   res.json({ result: allDocData });
 });

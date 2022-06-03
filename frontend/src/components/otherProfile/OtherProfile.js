@@ -42,7 +42,7 @@ const OtherProfile = (props) => {
       .then((text) => {
         setLiked(text.result);
         console.log(text);
-        console.log(text.result[0].title);
+        console.log(text.result);
       });
   };
 
@@ -102,17 +102,20 @@ const OtherProfile = (props) => {
           >
             {liked.map((like) => {
               return (
-                <Card sx={{ maxWidth: 150 }}>
+                <Card sx={{ width: 125, height: 125 }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       height="50"
-                      image={liked[0].cover}
+                      image={like.cover}
                       alt="example song"
                     />
                     <CardContent>
                       <Typography variant="h9" component="div">
-                        {liked[0].title}
+                        {like.title}
+                      </Typography>
+                      <Typography variant="body6" color="text.secondary">
+                        {like.artist}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
