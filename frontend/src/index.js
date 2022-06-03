@@ -14,7 +14,7 @@ import TopArtists from './components/topArtists/TopArtists';
 import ArtistsMonth from './components/topArtists/ArtistsMonth'
 import ArtistsYear from './components/topArtists/ArtistsYear'
 import ArtistsAll from './components/topArtists/ArtistsAll'
-import AccessTokenProvider, { AccessTokenContext } from './Contexts/accessTokenContext';
+import AccessTokenProvider from './Contexts/accessTokenContext';
 import TopAll from './components/topSongs/TopAll';
 import TopMonth from './components/topSongs/TopMonth';
 import TopYear from './components/topSongs/TopYear';

@@ -1,8 +1,5 @@
-import { Button } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom"
 import "./LikedSongs.css";
-
 import { Typography, Card, CardContent, Box, Button } from "@mui/material";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import { useContext } from "react";
@@ -10,12 +7,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import CardActions from "@mui/material/CardActions";
 
-function LikedAll() {
+function LikedSongs() {
   const { accessToken } = useContext(AccessTokenContext);
   const [longTermSongs, setLongTermSongs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/users/likedsongs/long?token=" + accessToken)
+    fetch("http://localhost:9000/users/likedsongs?token=" + accessToken)
       .then((res) => res.json())
       .then((data) => {
         setLongTermSongs(data.items);
@@ -23,7 +20,7 @@ function LikedAll() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Liked Songs</h1>
       {longTermSongs.length > 0 &&
         longTermSongs.map((val, key) => {
@@ -69,4 +66,4 @@ function LikedAll() {
   );
 }
 
-export default LikedAll;
+export default LikedSongs;

@@ -11,6 +11,7 @@ import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./TopArtists.css";
 
 function ArtistsMonth() {
@@ -29,6 +30,43 @@ function ArtistsMonth() {
   return (
     <div>
       <h1>Past Month of Top Artists</h1>
+      <div className="navbar">
+        <Button
+          component={Link}
+          to="/artists/month"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Month
+        </Button>
+
+        <Button
+          component={Link}
+          to="/artists/year"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Year
+        </Button>
+
+        <Button
+          component={Link}
+          to="/artists/all"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          All Time
+        </Button>
+      </div>
       <div className="artistGrid">
         <Grid container>
           {artists.length > 0 &&

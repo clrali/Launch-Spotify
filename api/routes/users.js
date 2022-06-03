@@ -4,41 +4,9 @@ var fetch = require('node-fetch');
 var auth = require('./spotify')
 var dotenv = require('dotenv').config()
 
-router.get('/likedsongs/short', async (req, res, next) => {
-    try{
-        const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=10&time_range=short_term'
-        const data = await fetch(url, {headers: {
-            'Authorization': 'Bearer ' + req.query.token
-        }}).catch(err=> console.log(err))
-            .then(res=> res.json())
-            .then(data => data)
-        return res.status(200).json(data)
-    }
-    catch(err){
-        console.log(err)
-        return res.status(500).json(err)
-    }
-})
-
-router.get('/likedsongs/medium', async (req, res, next) => {
+router.get('/likedsongs', async (req, res, next) => {
   try{
       const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=10'
-      const data = await fetch(url, {headers: {
-          'Authorization': 'Bearer ' + req.query.token
-      }}).catch(err=> console.log(err))
-          .then(res=> res.json())
-          .then(data => data)
-      return res.status(200).json(data)
-  }
-  catch(err){
-      console.log(err)
-      return res.status(500).json(err)
-  }
-})
-
-router.get('/likedsongs/long', async (req, res, next) => {
-  try{
-      const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=10&time_range=long_term'
       const data = await fetch(url, {headers: {
           'Authorization': 'Bearer ' + req.query.token
       }}).catch(err=> console.log(err))
