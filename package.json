@@ -2,10 +2,5 @@
   "dependencies": {
     "react-bootstrap-validation": "^0.1.11",
     "react-helmet": "^6.1.0"
-    
-  },  "scripts": {
-    "start": "node api/bin/www",
-    "heroku-postbuild": "cd api && npm install && cd ../frontend && npm install && npm run build"
-   }
-   
+  }
 }
