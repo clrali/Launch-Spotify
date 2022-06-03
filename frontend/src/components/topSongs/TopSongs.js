@@ -1,3 +1,7 @@
+
+import React from 'react'
+import {Helmet} from "react-helmet"
+
 import React, { useContext, useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -9,9 +13,18 @@ import Box from "@mui/material/Box";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import "../../App.css";
 
+
 function TopSongs() {
   return (
     <div>
+
+      <Helmet>
+        <title>Top Songs</title>
+      </Helmet>
+        <h1>
+            Most Played Songs
+        </h1>
+
       <h1>Top Songs</h1>
       <Button
         component={Link}
@@ -48,6 +61,7 @@ function TopSongs() {
       >
         All Time
       </Button>
+
     </div>
   );
 }
