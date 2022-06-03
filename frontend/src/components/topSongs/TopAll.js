@@ -5,8 +5,9 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { Link } from 'react-router-dom'
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
-import "../../App.css";
+import "../topArtists/TopArtists.css";
 
 function TopAll() {
   const { accessToken } = useContext(AccessTokenContext);
@@ -22,8 +23,45 @@ function TopAll() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Top Songs of All Time</h1>
+      <div className="navbar">
+        <Button
+          component={Link}
+          to="/top/month"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Month
+        </Button>
+
+        <Button
+          component={Link}
+          to="/top/year"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Year
+        </Button>
+
+        <Button
+          component={Link}
+          to="/top/all"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          All Time
+        </Button>
+      </div>
       {songs.length > 0 &&
         songs.map((val, key) => {
           return (

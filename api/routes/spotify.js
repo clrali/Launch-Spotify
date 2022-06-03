@@ -36,53 +36,36 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/messages", async (req, res, next) => {
+  await setDoc(doc(db, "profile", req.query.id, "messengers", req.query.user, "messages", "messageHistory"), {
+    created: true
+  });
   const messages = [];
-  const docs = await getDocs(
-    collection(
-      db,
-      "profile",
-      "K5icETWXzFDdLp0WlqqR",
-      "messengers",
-      req.query.id,
-      "messages"
-    )
+  const docs = await getDocs(collection(db, "profile", req.query.id, "messengers", req.query.user, "messages"));
+  docs.forEach((message) =>
+    messages.push({ ...message.data() })
   );
-  docs.forEach((message) => messages.push({ ...message.data() }));
-  console.log(messages);
   res.json({ result: messages });
 });
 
 router.get("/messengers", async (req, res, next) => {
   const messages = [];
-  const docs = await getDocs(
-    collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers")
-  );
-  docs.forEach((message) => messages.push({ id: message.id }));
-  console.log(messages);
+  const docs = await getDocs(collection(db, "profile", req.query.id, "messengers"));
+  docs.forEach((message) => {
+    
+    messages.push({ id: message.id })
+});
   res.json({ result: messages });
 });
 
 router.post("/message", async (req, res, next) => {
-  await addDoc(
-    collection(
-      db,
-      "profile",
-      "K5icETWXzFDdLp0WlqqR",
-      "messengers",
-      req.query.to
-    ),
-    req.body
-  );
-  await addDoc(
-    collection(
-      db,
-      "profile",
-      "qpMmWYxnS3u4DXd8zKLb",
-      "messengers",
-      req.query.from
-    ),
-    req.body
-  );
+  await addDoc(collection(db, "profile", req.query.from, "messengers", req.query.to, "messages"), {
+    content: req.body.content,
+    user: req.query.from
+  });
+  await addDoc(collection(db, "profile", req.query.to, "messengers", req.query.from, "messages"), {
+    content: req.body.content,
+    user: req.query.from
+  });
 });
 
 router.get("/callback", async (req, res, next) => {
@@ -117,8 +100,13 @@ router.get("/callback", async (req, res, next) => {
 });
 
 router.post("/userCreation", async (req, res, next) => {
-  await setDoc(doc(db, "profile", req.body.name), { name: req.body.name });
-
+  await setDoc(doc(db, "profile", req.body.name), {name: req.body.name});
+  const docs = await getDocs(collection(db, "profile"));
+  docs.forEach((messenger) => {
+    setDoc(doc(db, "profile", req.body.name, "messengers", messenger.id), {
+      created: true
+    })
+  });
   const url = "https://api.spotify.com/v1/me/tracks?offset=0&limit=10";
   await fetch(url, {
     headers: {

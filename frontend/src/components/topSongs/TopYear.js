@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
-import "../../App.css";
+import { Link } from "react-router-dom";
+import "../topArtists/TopArtists.css";
 
 function TopYear() {
   const { accessToken } = useContext(AccessTokenContext);
@@ -22,8 +23,47 @@ function TopYear() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Past Year of Top Songs</h1>
+
+      <div className="navbar">
+        <Button
+          component={Link}
+          to="/top/month"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Month
+        </Button>
+
+        <Button
+          component={Link}
+          to="/top/year"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Year
+        </Button>
+
+        <Button
+          component={Link}
+          to="/top/all"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          All Time
+        </Button>
+      </div>
+
       {songs.length > 0 &&
         songs.map((val, key) => {
           return (

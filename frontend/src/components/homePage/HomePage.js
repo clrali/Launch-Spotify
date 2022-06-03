@@ -21,6 +21,8 @@ import {
   Avatar,
 } from "@mui/material";
 import React, { useEffect, useState, useRef, useContext } from "react";
+import './HomePage.css'
+import { Helmet } from "react-helmet";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -63,6 +65,7 @@ const HomePage = (props) => {
 
   return (
     <>
+    <Helmet><title>Vocalize - Home</title></Helmet>
       <Grid
         container
         spacing={0}

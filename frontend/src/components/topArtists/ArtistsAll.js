@@ -1,9 +1,17 @@
-import { Typography, Card, CardContent, Box, Grid } from "@mui/material";
+import {
+  Typography,
+  Card,
+  CardContent,
+  Box,
+  Grid,
+  Button,
+} from "@mui/material";
 import React from "react";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./TopArtists.css";
 
 function ArtistsAll() {
@@ -20,15 +28,52 @@ function ArtistsAll() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Top Artists of All Time</h1>
+      <div className="navbar">
+        <Button
+          component={Link}
+          to="/artists/month"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Month
+        </Button>
+
+        <Button
+          component={Link}
+          to="/artists/year"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          Past Year
+        </Button>
+
+        <Button
+          component={Link}
+          to="/artists/all"
+          variant="outlined"
+          style={{
+            borderRadius: 35,
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          All Time
+        </Button>
+      </div>
       <div className="artistGrid">
         <Grid container>
           {artists.length > 0 &&
             artists.map((val, key) => {
               return (
                 <Grid item xs={2.4} key={val.id}>
-                  <Box sx={{ mx: "auto", width: 230, p: 1 }}>
+                  <Box sx={{ mx: "auto", width: 250, p: 1 }}>
                     <Card
                       variant="outlined"
                       style={{ margin: "0 auto", display: "flex" }}
