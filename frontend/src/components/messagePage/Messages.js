@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SearchIcon from "@mui/icons-material/Search";
+import SendIcon from "@mui/icons-material/Send";
 import {
   AppBar,
   Box,
@@ -30,7 +31,7 @@ const Messages = () => {
   const [messenger, setMessenger] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:9000/spotify/messengers")
+    fetch("http://localhost:9000/spotify/messengers?id=" + user)
       .then((res) => res.json())
       .then((text) => {
         setMessengers(text.result);
@@ -39,9 +40,16 @@ const Messages = () => {
   }, []);
 
   const updateMessages = () => {
-    fetch("http://localhost:9000/spotify/messages?id=" + messenger)
+    fetch("http://localhost:9000/spotify/messages?user=" + messenger + "&id=" + user)
       .then((res) => res.json())
       .then((text) => {
+        for(let i = 0; i < text.result.length; i++) {
+          console.log(text.result[0]);
+          if (text.result[i].created) {
+            text.result.splice(i, 1);
+            i--
+          }
+        }
         if (text.result.length === 0) {
           setNothing(true);
         }
@@ -53,8 +61,21 @@ const Messages = () => {
       .catch((err) => console.log(err));
   };
 
-  const sendMessage = () => {
+  const sendMessage = (e) => {
+    e.preventDefault();
 
+    const newMessage = {
+      content: textFieldRefMessage.current.value,
+    };
+    fetch("http://localhost:9000/spotify/message?from=" + user + "&to=" + messenger, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newMessage)
+    });
+
+    textFieldRefMessage.current.value = "";
   };
 
   return (
@@ -127,7 +148,11 @@ const Messages = () => {
               label="Send a Message"
               variant="standard"
               inputRef={textFieldRefMessage}
-            ></TextField>
+            >
+            </TextField>
+            <IconButton onClick={sendMessage}>
+                <SendIcon />
+              </IconButton>
           </Grid>
         </Grid>
       </Card>
