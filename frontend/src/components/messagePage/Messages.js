@@ -116,7 +116,7 @@ const Messages = () => {
             >
               <InputBase
                 sx={{ ml: 1, flex: 1 }}
-                placeholder="Search Mesengers"
+                placeholder="Search Messengers"
                 inputProps={{ "aria-label": "search person" }}
               />
               <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
