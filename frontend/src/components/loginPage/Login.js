@@ -23,7 +23,7 @@ const Login = (props) => {
 
 
   const onClick = (e) => {
-    fetch("http://localhost:9000/spotify")
+    fetch("spotify")
       .then((res) => res.json())
       .then((data) => {
         window.open(data.url);
