@@ -50,9 +50,10 @@ router.get("/messages", async (req, res, next) => {
 router.get("/messengers", async (req, res, next) => {
   const messages = [];
   const docs = await getDocs(collection(db, "profile", req.query.id, "messengers"));
-  docs.forEach((message) =>
+  docs.forEach((message) => {
+    
     messages.push({ id: message.id })
-  );
+});
   res.json({ result: messages });
 });
 
