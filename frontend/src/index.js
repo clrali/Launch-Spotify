@@ -8,7 +8,7 @@ import Messages from "./components/messagePage/Messages";
 import Login from "./components/loginPage/Login";
 import LikedSongs from "./components/likedSongs/LikedSongs";
 import HomePage from "./components/homePage/HomePage";
-
+import OtherProfile from "./components/otherProfile/OtherProfile";
 import Forum from "./components/forum/Forum";
 import TopSongs from "./components/topSongs/TopSongs";
 import TopArtists from "./components/topArtists/TopArtists";
@@ -31,6 +31,7 @@ root.render(
             <Route path="/top" element={<TopSongs />} />
             <Route path="/artists" element={<TopArtists />} />
             <Route path="*" element={<ErrorPage />} />
+            <Route path="/otherprofile" element={<OtherProfile />} />
           </Route>
         </Routes>
       </BrowserRouter>

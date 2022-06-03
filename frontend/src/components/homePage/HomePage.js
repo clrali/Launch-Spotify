@@ -1,7 +1,8 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SearchIcon from "@mui/icons-material/Search";
-import { SecondaryTokenContext } from "../../Contexts/secondaryTokenContext";
+import { OtherContext } from "../../Contexts/OtherContext";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   AppBar,
@@ -37,7 +38,7 @@ const commonStyles = {
 
 const HomePage = (props) => {
   const [users, setUsers] = useState([]);
-  const { accessToken, setAccessToken } = useContext(SecondaryTokenContext);
+  const { other, setOther } = useContext(OtherContext);
 
   const printUsers = async () => {
     fetch("http://localhost:9000/profile/info?myParam=10")
@@ -52,8 +53,11 @@ const HomePage = (props) => {
     printUsers();
   }, []);
 
+  let navigate = useNavigate(); 
+
   const onClick = (event) => {
-    console.log("clicked!");
+    event.preventDefault();
+    navigate('/otherprofile');
   };
 
   return (
@@ -78,7 +82,8 @@ const HomePage = (props) => {
                 <ListItem
                   disablePadding
                 >
-                  <ListItemButton>
+                  <ListItemButton onClick={
+                    (e) => onClick(e)}>
                     <ListItemAvatar>
                       <Avatar
                         alt={'example'}
