@@ -71,7 +71,7 @@ function ArtistsYear() {
             artists.map((val, key) => {
               return (
                 <Grid item xs={2.4} key={val.id}>
-                  <Box sx={{ mx: "auto", width: 230, p: 1 }}>
+                  <Box sx={{ mx: "auto", width: 250, p: 1 }}>
                     <Card
                       variant="outlined"
                       style={{ margin: "0 auto", display: "flex" }}
