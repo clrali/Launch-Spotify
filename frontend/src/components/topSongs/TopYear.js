@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import { Link } from "react-router-dom";
-import "../../App.css";
 import "../topArtists/TopArtists.css";
 
 function TopYear() {
@@ -24,7 +23,7 @@ function TopYear() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Past Year of Top Songs</h1>
 
       <div className="navbar">

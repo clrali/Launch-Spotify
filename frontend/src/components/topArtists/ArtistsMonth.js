@@ -28,7 +28,7 @@ function ArtistsMonth() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Past Month of Top Artists</h1>
       <div className="navbar">
         <Button

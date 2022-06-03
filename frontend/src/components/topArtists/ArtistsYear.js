@@ -28,7 +28,7 @@ function ArtistsYear() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Past Year of Top Artists</h1>
       <div className="navbar">
         <Button

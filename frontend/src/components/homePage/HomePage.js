@@ -20,6 +20,7 @@ import {
   Avatar,
 } from "@mui/material";
 import React, { useEffect, useState, useRef, useContext } from "react";
+import './HomePage.css'
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

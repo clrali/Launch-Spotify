@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import { Link } from 'react-router-dom';
 import "../topArtists/TopArtists.css"
-import "../../App.css";
 
 function TopMonth() {
   const { accessToken } = useContext(AccessTokenContext);
@@ -24,7 +23,7 @@ function TopMonth() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Past Month of Top Songs</h1>
 
       <div className="navbar">

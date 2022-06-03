@@ -1,4 +1,11 @@
-import { Typography, Card, CardContent, Box, Grid, Button } from "@mui/material";
+import {
+  Typography,
+  Card,
+  CardContent,
+  Box,
+  Grid,
+  Button,
+} from "@mui/material";
 import React from "react";
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
 import { useContext } from "react";
@@ -21,7 +28,7 @@ function ArtistsAll() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Top Artists of All Time</h1>
       <div className="navbar">
         <Button

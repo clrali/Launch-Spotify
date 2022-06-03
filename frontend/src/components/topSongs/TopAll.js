@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom'
 import { AccessTokenContext } from "../../Contexts/accessTokenContext";
-import "../../App.css";
 import "../topArtists/TopArtists.css";
 
 function TopAll() {
@@ -24,7 +23,7 @@ function TopAll() {
   }, []);
 
   return (
-    <div>
+    <div className="background">
       <h1>Top Songs of All Time</h1>
       <div className="navbar">
         <Button

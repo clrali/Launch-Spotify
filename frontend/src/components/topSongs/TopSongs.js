@@ -1,12 +1,12 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import "../../App.css";
 import "../topArtists/TopArtists.css"
+import "./TopSongs.css"
 
 function TopSongs() {
   return (
-    <div>
+    <div className="background">
       <h1>Top Songs</h1>
       <div className="navbar">
         <Button
