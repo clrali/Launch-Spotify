@@ -37,36 +37,64 @@ router.get("/", async (req, res, next) => {
 
 router.get("/messages", async (req, res, next) => {
   const messages = [];
-  const docs = await getDocs(collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers", req.query.id, "messages"));
-  docs.forEach((message) =>
-    messages.push({ ...message.data() })
+  const docs = await getDocs(
+    collection(
+      db,
+      "profile",
+      "K5icETWXzFDdLp0WlqqR",
+      "messengers",
+      req.query.id,
+      "messages"
+    )
   );
+  docs.forEach((message) => messages.push({ ...message.data() }));
   console.log(messages);
   res.json({ result: messages });
 });
 
 router.get("/messengers", async (req, res, next) => {
   const messages = [];
-  const docs = await getDocs(collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers"));
-  docs.forEach((message) =>
-    messages.push({ id: message.id })
+  const docs = await getDocs(
+    collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers")
   );
+  docs.forEach((message) => messages.push({ id: message.id }));
   console.log(messages);
   res.json({ result: messages });
 });
 
 router.post("/message", async (req, res, next) => {
-  await addDoc(collection(db, "profile", "K5icETWXzFDdLp0WlqqR", "messengers", req.query.to), req.body);
-  await addDoc(collection(db, "profile", "qpMmWYxnS3u4DXd8zKLb", "messengers", req.query.from), req.body);
+  await addDoc(
+    collection(
+      db,
+      "profile",
+      "K5icETWXzFDdLp0WlqqR",
+      "messengers",
+      req.query.to
+    ),
+    req.body
+  );
+  await addDoc(
+    collection(
+      db,
+      "profile",
+      "qpMmWYxnS3u4DXd8zKLb",
+      "messengers",
+      req.query.from
+    ),
+    req.body
+  );
 });
 
 router.get("/callback", async (req, res, next) => {
   try {
     const code = req.query.code;
     const url =
-      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirect_uri;
+      "https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" +
+      code +
+      "&redirect_uri=" +
+      redirect_uri;
     const headers = {
-      "Authorization":
+      Authorization:
         "Basic " +
         Buffer.from(client_id + ":" + client_secret, "utf8").toString("base64"),
       "Content-Type": "application/x-www-form-urlencoded",
@@ -89,8 +117,8 @@ router.get("/callback", async (req, res, next) => {
 });
 
 router.post("/userCreation", async (req, res, next) => {
-  await setDoc(doc(db, "profile", req.body.name), {name: req.body.name});
-  
+  await setDoc(doc(db, "profile", req.body.name), { name: req.body.name });
+
   const url = "https://api.spotify.com/v1/me/tracks?offset=0&limit=10";
   await fetch(url, {
     headers: {
@@ -101,30 +129,35 @@ router.post("/userCreation", async (req, res, next) => {
     .then((res) => res.json())
     .then((data) =>
       data.items.map((val, key) => {
-        addDoc(collection(db, "profile", req.body.name, "likedSongs"), {
-          title: val.track.name,
-          cover: val.track.album.images[0].url,
-          artist: val.track.artists[0].name,
-        });
+        setDoc(
+          doc(db, "profile", req.body.name, "likedSongs", val.track.name),
+          {
+            title: val.track.name,
+            cover: val.track.album.images[0].url,
+            artist: val.track.artists[0].name,
+          }
+        );
       })
     );
-    return res.json({message: "It works"});
- });
+  return res.json({ message: "It works" });
+});
 
-router.get('/user', async (req, res, next) => {
-  try{
-      const url = 'https://api.spotify.com/v1/me'
-      const data = await fetch(url, {headers: {
-          'Authorization': 'Bearer ' + req.query.temp
-      }}).catch(err=> console.log(err))
-          .then(res=> res.json())
-          .then(data => data)
-      return res.status(200).json(data)
+router.get("/user", async (req, res, next) => {
+  try {
+    const url = "https://api.spotify.com/v1/me";
+    const data = await fetch(url, {
+      headers: {
+        Authorization: "Bearer " + req.query.temp,
+      },
+    })
+      .catch((err) => console.log(err))
+      .then((res) => res.json())
+      .then((data) => data);
+    return res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
   }
-  catch(err){
-      console.log(err)
-      return res.status(500).json(err)
-  }
-})
+});
 
 module.exports = router;

@@ -23,7 +23,8 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import React, { useEffect, useState, useRef, setState } from "react";
+import React, { useEffect, useState, useRef, setState, useContext } from "react";
+import { OtherContext } from "../../Contexts/OtherContext";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -35,9 +36,14 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 
 const OtherProfile = (props) => {
   const [liked, setLiked] = useState([]);
+  const { other, setOther } = useContext(OtherContext);
+
+  console.log(other)
 
   const getLiked = async () => {
-    fetch("http://localhost:9000/profile/likedSongs?myParam=10")
+    let likedUrl = "http://localhost:9000/profile/likedSongs/" + other
+    let url = likedUrl.replace(" ", "%20")
+    fetch(url)
       .then((res) => res.json())
       .then((text) => {
         setLiked(text.result);
@@ -49,6 +55,8 @@ const OtherProfile = (props) => {
   useEffect(() => {
     getLiked();
   }, []);
+
+
 
   return (
     <>

@@ -24,17 +24,18 @@ router.get("/info", async (req, res, next) => {
   res.json({ result: allDocData });
 });
 
-router.get("/likedSongs", async (req, res, next) => {
+router.get("/likedSongs/:username", async (req, res, next) => {
   const allDocData = [];
+  console.log(req.params.username)
   // console.log(req.query)  // shows the URL params (stuff after the ? in the URL)
-  const docs = await getDocs(collection(db, "profile", "exampleuser", "likedSongs"));
+  const docs = await getDocs(collection(db, "profile", req.params.username, "likedSongs"));
   docs.forEach((doc) => {
     if (allDocData.length < 5) {
     const object = doc.data();
     allDocData.push(object);
     }
   });
-  res.json({ result: allDocData });
+  return res.json({ result: allDocData });
 });
 
 module.exports = router;

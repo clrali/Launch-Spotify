@@ -55,8 +55,9 @@ const HomePage = (props) => {
 
   let navigate = useNavigate(); 
 
-  const onClick = (event) => {
+  const onClick = (event, name) => {
     event.preventDefault();
+    setOther(name)
     navigate('/otherprofile');
   };
 
@@ -83,7 +84,7 @@ const HomePage = (props) => {
                   disablePadding
                 >
                   <ListItemButton onClick={
-                    (e) => onClick(e)}>
+                    (e) => onClick(e, user.name)}>
                     <ListItemAvatar>
                       <Avatar
                         alt={'example'}
