@@ -40,6 +40,28 @@ const Messages = () => {
       .catch((err) => console.log(err));
   }, []);
 
+useEffect(() => {
+  fetch("http://localhost:9000/spotify/messages?user=" + messenger + "&id=" + user)
+      .then((res) => res.json())
+      .then((text) => {
+        for(let i = 0; i < text.result.length; i++) {
+          console.log(text.result[0]);
+          if (text.result[i].created) {
+            text.result.splice(i, 1);
+            i--
+          }
+        }
+        if (text.result.length === 0) {
+          setNothing(true);
+        }
+        if (text.result.length !== 0) {
+          setNothing(false);
+        }
+        setMessages(text.result);
+      })
+      .catch((err) => console.log(err));
+}, [messenger]);
+
   const updateMessages = () => {
     fetch("http://localhost:9000/spotify/messages?user=" + messenger + "&id=" + user)
       .then((res) => res.json())
@@ -137,7 +159,6 @@ const Messages = () => {
             <Messengers
               messengers={messengers}
               setMessenger={setMessenger}
-              update={updateMessages}
             ></Messengers>
           </Grid>
           <Grid item xs={6}>
