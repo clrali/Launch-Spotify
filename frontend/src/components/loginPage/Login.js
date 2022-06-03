@@ -10,8 +10,6 @@ import {Container} from "react-bootstrap"
 import { fontSize } from "@mui/system";
 import {Helmet} from "react-helmet";
 
-import { Container } from "react-bootstrap";
-import { UserContext } from "../../Contexts/UserContext";
 
 
 const Login = (props) => {
@@ -117,7 +115,7 @@ const Login = (props) => {
         position: "fixed",
         width: "100vw",
       }}
-    >
+    
       <div>
         <Card
           sx={{
