@@ -1,12 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+import React from "react";
 import Button from "@mui/material/Button";
-import {Link} from 'react-router-dom'
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { AccessTokenContext } from "../../Contexts/accessTokenContext";
+import { Link } from "react-router-dom";
 import "../../App.css";
 
 function TopSongs() {

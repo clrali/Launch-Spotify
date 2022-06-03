@@ -24,6 +24,4 @@ router.get("/info", async (req, res, next) => {
   res.json({ result: allDocData });
 });
 
-
-
 module.exports = router;
