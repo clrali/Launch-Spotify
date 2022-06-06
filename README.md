@@ -5,7 +5,7 @@ Vocalize is a platform meant to bridge the gap between Spotify and social media.
 
 ## Installation
 
-$ git clone https://github.com/clrali/Launch-Spotify.git
+  $ git clone https://github.com/clrali/Launch-Spotify.git
 
 npm install in the ./frontend and ./api folders
 
